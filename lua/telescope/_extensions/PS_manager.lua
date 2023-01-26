@@ -13,9 +13,7 @@ local action_state = require("telescope.actions.state")
 local entry_display = require("telescope.pickers.entry_display")
 
 local core = require("PS_manager.core")
-local config=require("PS_manager.config")
-
-
+local config = require("PS_manager.config")
 
 local function create_finder()
 	local displayer = entry_display.create({
@@ -35,7 +33,7 @@ local function create_finder()
 	end
 
 	return finders.new_table({
-		results = config.config.projects,
+		results = config.get_projects(),
 		entry_maker = function(entry)
 			local name = vim.fn.fnamemodify(entry, ":t")
 			return {
