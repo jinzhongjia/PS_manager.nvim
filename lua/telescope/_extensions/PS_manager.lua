@@ -1,5 +1,5 @@
 local has_telescope, telescope = pcall(require, "telescope")
-
+local core = require("PS_manager.core")
 if not has_telescope then
 	return
 end
@@ -59,6 +59,7 @@ local function change_working_directory(prompt_bufnr, prompt)
 		actions.close(prompt_bufnr)
 	end
 	vim.api.nvim_set_current_dir(project_path)
+	core.path.set_current_path(project_path)
 	return project_path
 end
 
