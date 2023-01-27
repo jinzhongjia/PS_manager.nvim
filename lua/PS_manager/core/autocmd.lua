@@ -42,6 +42,7 @@ api.nvim_create_autocmd({ "BufEnter" }, {
 		end
         local current_path = path.get_path_by_id(path_id)
 		api.nvim_set_current_dir(current_path)
+		path.set_current_path(current_path)
 	end,
 })
 

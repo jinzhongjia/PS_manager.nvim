@@ -2,7 +2,20 @@ local lib = require("PS_manager.core.lib")
 -- local current_path = vim.fn.getcwd()
 local current_path = nil
 
+local set_lock = false
+
+local function lock_set_path()
+	set_lock = true
+end
+
+local function unlock_set_path()
+	set_lock = false
+end
+
 local function set_current_path(path)
+	if set_lock then
+		return
+	end
 	current_path = path
 end
 
@@ -84,4 +97,6 @@ return {
 	get_id_by_path = get_id_by_path,
 	del_path = del_path,
 	add_path = add_path,
+	lock_set_path = lock_set_path,
+	unlock_set_path = unlock_set_path,
 }

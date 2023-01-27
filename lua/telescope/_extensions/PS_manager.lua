@@ -1,5 +1,4 @@
 local has_telescope, telescope = pcall(require, "telescope")
-local core = require("PS_manager.core")
 if not has_telescope then
 	return
 end
@@ -58,7 +57,6 @@ local function change_working_directory(prompt_bufnr, prompt)
 	else
 		actions.close(prompt_bufnr)
 	end
-	vim.api.nvim_set_current_dir(project_path)
 	core.path.set_current_path(project_path)
 	return project_path
 end
@@ -67,11 +65,10 @@ local function find_project_files(prompt_bufnr)
 	local project_path = change_working_directory(prompt_bufnr, true)
 	local opt = {
 		cwd = project_path,
-		-- hidden = config.options.show_hidden,
 		mode = "insert",
 	}
-
-	builtin.find_files(opt)
+	local file = require("telescope._extensions.PS_manager.file")
+	file.find_files(opt, project_path)
 end
 
 -- picker function:
